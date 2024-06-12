@@ -1,0 +1,27 @@
+services:
+  nginx:
+    container_name: nginx
+    networks:
+      - transcendence
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    env_file: 
+      - .env
+    restart: on-failure
+    ports:
+      - "8443:443"
+  postgresql:
+    container_name: postgresql
+    networks:
+      - transcendence
+    build:
+      context: ./postgresql
+      dockerfile: Dockerfile
+    env_file: 
+      - .env
+    restart: on-failure
+
+networks:
+  transcendence:
+    driver: bridge
